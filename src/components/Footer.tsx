@@ -8,6 +8,6 @@ const Footer = () => {
 			<p>© ALL RIGHTS RESERVED.</p>
 		</div>
     )
-}
+};
 
-export default Footer
+export default Footer;
