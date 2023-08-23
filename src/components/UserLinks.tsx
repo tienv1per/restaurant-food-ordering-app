@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const UserLinks = () => {
     const user = false;
+    // just only works in client components
     const { data, status } = useSession();
     return (
         <div>
