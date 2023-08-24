@@ -11,7 +11,7 @@ const getData = async(category: string) => {
 		throw new Error("Failed");
 	}
 	return res.json();
-}
+};
 
 type Props = {
 	params: {

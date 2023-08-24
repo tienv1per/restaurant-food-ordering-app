@@ -1,8 +1,8 @@
 import { prisma } from "@/utils/connect";
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
 // fetching all categories
-export const GET = async() => {
+export const GET = async(req: NextRequest) => {
     try {
         const categories = await prisma.category.findMany();
         return new NextResponse(JSON.stringify(categories), {status: 200})

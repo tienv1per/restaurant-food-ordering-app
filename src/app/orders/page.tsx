@@ -25,7 +25,12 @@ const OrdersPage = () => {
 
 	const queryClient = useQueryClient();
 
+	// useMutation là một hook được cung cấp bởi thư viện React Query để thực hiện các hoạt động liên quan đến việc thay đổi dữ liệu (mutate data) trên máy chủ. 
+	// Nó được sử dụng để gửi các yêu cầu HTTP như POST, PUT, DELETE để thay đổi dữ liệu trên máy chủ và cập nhật dữ liệu trong ứng dụng của bạn 
+	// mà không cần tải lại toàn bộ trang.
 	const mutation = useMutation({
+		// một hàm callback, chấp nhận một đối tượng chứa thông tin cần thiết để thực hiện mutation (trong trường hợp này là id và status). 
+		// Trong phần này, bạn đang sử dụng hàm fetch để gửi yêu cầu PUT đến một địa chỉ API cụ thể để cập nhật trạng thái đơn hàng dựa trên id và status
 		mutationFn: ({id, status}: {id: string, status: string}) => {
 			return fetch(`http://localhost:3000/api/orders/${id}`, {
 				method: "PUT",
@@ -35,6 +40,9 @@ const OrdersPage = () => {
 				body: JSON.stringify(status)
 			});
 		},
+		// sử dụng queryClient.invalidateQueries để làm mới cache của truy vấn có queryKey là ["orders"]. 
+		// Điều này đồng nghĩa với việc sau khi mutation thành công, dữ liệu của truy vấn "orders" sẽ được làm mới, 
+		// đảm bảo rằng dữ liệu hiển thị trên giao diện người dùng luôn được cập nhật theo trạng thái mới nhất sau khi cập nhật.
 		onSuccess() {
 			queryClient.invalidateQueries({queryKey: ["orders"]})
 		}
