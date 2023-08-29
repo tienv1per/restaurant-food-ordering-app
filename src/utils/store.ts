@@ -12,6 +12,10 @@ const INITIAL_STATE = {
 // có khả năng thêm và xoá sản phẩm từ giỏ hàng và cập nhật tổng số lượng sản phẩm và tổng giá tiền một cách dễ dàng
 // set là một hàm để cập nhật trạng thái
 // get là một hàm để lấy giá trị hiện tại của trạng thái
+
+// persist middleware trong Zustand là một middleware được cung cấp bởi thư viện Zustand 
+// để hỗ trợ lưu trạng thái của store vào lưu trữ cục bộ (localStorage hoặc sessionStorage) 
+// để có thể khôi phục lại trạng thái khi người dùng tải lại trang hoặc đóng mở tab trình duyệt.
 export const useCartStore = create(persist<CartType & ActionTypes>((set, get) => ({
     products: INITIAL_STATE.products,
     totalItems: INITIAL_STATE.totalItems,
@@ -32,5 +36,5 @@ export const useCartStore = create(persist<CartType & ActionTypes>((set, get) =>
         }));
     },
     }),
-    {name: "cart"}
+    {name: "cart", skipHydration: true}
 ));
